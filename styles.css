@@ -30,7 +30,7 @@ html {
     z-index: 1000;
     transition: all 0.3s ease;
     padding: 1rem 0;
-    background: rgba(255, 255, 255, 0); /* Start transparent on desktop */
+    background: rgba(255, 255, 255, 0); /* Start transparent */
 }
 
 .header.scrolled {
@@ -67,12 +67,12 @@ html {
 .logo h1 {
     font-size: 1.5rem;
     font-weight: bold;
-    color: white;
+    color: white; /* Default color for logo text, visible against dark hero */
     transition: color 0.3s ease;
 }
 
 .header.scrolled .logo h1 {
-    color: #1f2937;
+    color: #1f2937; /* Color when scrolled */
 }
 
 /* Desktop Navigation Default State */
@@ -115,12 +115,12 @@ html {
 .mobile-menu-btn span {
     width: 25px;
     height: 3px;
-    background: white;
+    background: white; /* Default color for hamburger lines, visible against dark hero */
     transition: all 0.3s ease;
 }
 
 .header.scrolled .mobile-menu-btn span {
-    background: #1f2937;
+    background: #1f2937; /* Color when scrolled */
 }
 
 /* Buttons (YOUR ORIGINAL BUTTON STYLES - UNCHANGED) */
@@ -1049,18 +1049,11 @@ section:not(#home).revealed,
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Removed immediate background, logo, and hamburger color changes here */
+    /* These will now be controlled by the .header.scrolled class, just like desktop */
+
     .header {
-        background: rgba(255, 255, 255, 0.95);
-        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        padding: 0.8rem 0; 
-    }
-
-    .header .logo h1 {
-        color: #1f2937; 
-    }
-
-    .header.scrolled .logo h1 { 
-        color: #1f2937;
+        padding: 0.8rem 0; /* Adjust padding for mobile header */
     }
 
     /* Mobile Nav Styles */
@@ -1098,7 +1091,7 @@ section:not(#home).revealed,
     }
 
     .header.scrolled .nav-link { 
-        color: white;
+        color: white; /* Ensure nav links stay white in mobile menu */
     }
 
     /* Hide desktop contact buttons on mobile */
@@ -1109,10 +1102,6 @@ section:not(#home).revealed,
     /* Show mobile menu button */
     .mobile-menu-btn {
         display: flex; 
-    }
-
-    .mobile-menu-btn span {
-        background: #1f2937; 
     }
 
     /* Animation for mobile menu button (hamburger to cross) */
