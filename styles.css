@@ -30,7 +30,6 @@ html {
     z-index: 1000;
     transition: all 0.3s ease;
     padding: 1rem 0;
-    /* ADDED: Default background for header to avoid transparency issues before scroll */
     background: rgba(255, 255, 255, 0); /* Start transparent on desktop */
 }
 
@@ -110,7 +109,6 @@ html {
     background: none;
     border: none;
     cursor: pointer;
-    /* ADDED: Ensure it's above the nav when active */
     z-index: 1001; 
 }
 
@@ -236,7 +234,8 @@ html {
 .hero-content {
     max-width: 800px;
     padding: 0 20px;
-    animation: fadeInUp 1s ease;
+    /* Keeping this for initial hero content animation */
+    animation: fadeInUp 1s ease; 
 }
 
 .hero-title {
@@ -1023,59 +1022,80 @@ section {
     }
 }
 
+/* ADDED: General appearing effect for sections and cards */
+section:not(#home), /* Exclude home section as it has hero animation */
+.room-card,
+.gallery-item,
+.info-card,
+.contact-card,
+.booking-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out; /* Smooth transition */
+}
+
+section:not(#home).revealed,
+.room-card.revealed,
+.gallery-item.revealed,
+.info-card.revealed,
+.contact-card.revealed,
+.booking-card.revealed {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* ADDED: Ensure header has a background on mobile */
     .header {
         background: rgba(255, 255, 255, 0.95);
         box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
-        padding: 0.8rem 0; /* Slightly less padding on mobile */
+        padding: 0.8rem 0; 
     }
 
     .header .logo h1 {
-        color: #1f2937; /* Ensure logo text is readable on mobile header */
+        color: #1f2937; 
     }
 
-    .header.scrolled .logo h1 { /* Override scrolled effect for logo on mobile if needed */
+    .header.scrolled .logo h1 { 
         color: #1f2937;
     }
 
     /* Mobile Nav Styles */
     .nav {
-        /* ORIGINAL: display: none; */ /* Keep this as default hidden state */
-        flex-direction: column; /* Stack links vertically */
-        position: fixed; /* Position relative to viewport */
-        top: 0; /* Position from top of viewport */
-        left: 0; /* Start from left of viewport */
-        width: 100%; /* Full width */
-        height: 100vh; /* Full viewport height */
-        background: #1f2937; /* Dark background for mobile menu */
-        justify-content: center; /* Center content vertically */
-        align-items: center; /* Center content horizontally */
+        flex-direction: column; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100vh; 
+        background: #1f2937; 
+        justify-content: center; 
+        align-items: center; 
         gap: 1.5rem;
-        transform: translateX(100%); /* Start off-screen to the right */
-        transition: transform 0.4s ease-out; /* Smooth slide transition */
-        z-index: 999; /* Below mobile menu button but above page content */
-        overflow-y: auto; /* Enable scrolling for long menus */
-        padding: 60px 20px; /* Padding for content inside the menu */
-        box-sizing: border-box; /* Include padding in width/height */
-        display: none; /* Keep this to initially hide the nav on mobile */
+        transform: translateX(100%); 
+        transition: transform 0.4s ease-out; 
+        z-index: 999; 
+        overflow-y: auto; 
+        padding: 60px 20px; 
+        box-sizing: border-box; 
+        display: none; 
     }
 
     .nav.show {
-        transform: translateX(0); /* Slide into view */
-        display: flex; /* Make it visible when 'show' class is present */
+        transform: translateX(0); 
+        display: flex; 
     }
 
     .nav-link {
-        color: white; /* Ensure links are white on dark mobile background */
-        font-size: 1.5rem; /* Larger font size for touch targets */
+        color: white; 
+        font-size: 1.5rem; 
         padding: 10px 0;
         width: 100%;
         text-align: center;
     }
 
-    .header.scrolled .nav-link { /* Ensure mobile links are white even when scrolled */
+    .header.scrolled .nav-link { 
         color: white;
     }
 
@@ -1086,14 +1106,14 @@ section {
 
     /* Show mobile menu button */
     .mobile-menu-btn {
-        display: flex; /* Show the hamburger icon on mobile */
+        display: flex; 
     }
 
     .mobile-menu-btn span {
-        background: #1f2937; /* Ensure lines are visible on mobile header */
+        background: #1f2937; 
     }
 
-    /* ADDED: Animation for mobile menu button (hamburger to cross) */
+    /* Animation for mobile menu button (hamburger to cross) */
     .mobile-menu-btn.active span:nth-child(1) {
         transform: translateY(7px) rotate(45deg);
     }
@@ -1212,7 +1232,7 @@ section {
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 1; /* This ensures the slider is behind the overlay (which likely has z-index 2) */
+    z-index: 1; 
 }
 
 .new-slide-image {
@@ -1222,27 +1242,25 @@ section {
     position: absolute;
     top: 0;
     left: 0;
-    opacity: 0; /* Hidden by default */
-    transition: opacity 1.5s ease-in-out; /* Smooth fade effect */
+    opacity: 0; 
+    transition: opacity 1.5s ease-in-out; 
 }
 
 .new-slide-image.active-new-slide {
-    opacity: 1; /* Show the active image */
+    opacity: 1; 
 }
 
-/* Ensure your existing hero-overlay and hero-content have appropriate z-index */
-/* If you don't already have these, you might need to add/verify them in your main styles */
 .hero-overlay {
-    z-index: 2; /* Needs to be higher than #heroNewImageSlider */
-    position: absolute; /* Ensure it's positioned for z-index to work */
+    z-index: 2; 
+    position: absolute; 
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Adjust opacity as desired */
+    background-color: rgba(0, 0, 0, 0.5); 
 }
 
 .hero-content {
-    z-index: 3; /* Needs to be higher than .hero-overlay */
-    position: relative; /* Or absolute, ensure it's positioned for z-index to work */
+    z-index: 3; 
+    position: relative; 
 }
